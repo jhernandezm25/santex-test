@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc &&  ts-node --esm src/index.ts",
+    "buildDatabase": "docker-compose up --build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/jhernandezm25/santex-test#readme",
   "devDependencies": {
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20.9.1",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
@@ -35,6 +37,10 @@
   },
   "dependencies": {
     "@types/express": "^4.17.21",
-    "express": "^4.18.2"
+    "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3"
   }
 }
