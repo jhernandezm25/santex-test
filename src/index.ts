@@ -1,25 +1,41 @@
 import express, { Application, Request, Response } from 'express'
 import dotenv from 'dotenv'
-import bodyParser from 'body-parser';
-//import router from './routes'
+import bodyParser from 'body-parser'
+import { schema } from './graphql/schema'
+import createLeague from './graphql/resolvers/resolver'
+import { graphqlHTTP } from 'express-graphql'
+import DB from './database/mongodb'
 
 dotenv.config()
 
 const app: Application = express()
 const PORT = process.env.APP_PORT || 3001
 
-// Middleware para procesar solicitudes JSON
-app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// database
+const db = new DB()
+db.getConnection()
 
-// Rutas principales
+// resolvers
+const root = {
+  importLeague: createLeague,
+}
+
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    rootValue: root,
+    graphiql: true,
+  }),
+)
+// health
 app.get('/', (req: Request, res: Response) => {
   res.send('¡Hola, mundo!')
 })
-
-// Rutas del enrutador
-//app.use('/api', router)
 
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`)

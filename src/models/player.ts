@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose'
 
-interface Player extends Document {
+export interface Player extends Document {
   name: string
   position: string
   dateOfBirth: Date
