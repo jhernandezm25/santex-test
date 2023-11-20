@@ -1,7 +1,7 @@
 import { Model, Document } from 'mongoose'
 import { Player, PlayerModel } from '../models/player'
 import { ErrorMessages } from '../common/errors/errors'
-
+import competitionRepository from './competition.repository'
 class PlayerRepository {
   private readonly playerModel: Model<Player & Document>
 
@@ -23,6 +23,10 @@ class PlayerRepository {
 
   async findByLeagueId(leagueId: number): Promise<Player | null> {
     return this.playerModel.findOne({ leagueId }).lean()
+  }
+
+  async find(query: any) {
+    return this.playerModel.find(query).lean()
   }
 
   async update(id: string, data: Partial<Player>): Promise<Player | null> {
@@ -78,6 +82,30 @@ class PlayerRepository {
     } catch (error: any) {
       throw new Error(error.message)
     }
+  }
+
+  async getPlayersByLeague(
+    leagueCode: string,
+    teamName?: string,
+    coach: boolean = false,
+  ): Promise<Player[]> {
+    let playersQuery: any = { leagueCode, isCoach: coach }
+
+    const league = await competitionRepository.findByAttributte({
+      code: leagueCode,
+    })
+
+    if (!league) {
+      throw new Error(ErrorMessages.CODE_NOT_EXISTS)
+    }
+
+    if (teamName) {
+      playersQuery = { ...playersQuery, team: teamName }
+    }
+
+    const players = await PlayerModel.find(playersQuery).lean()
+
+    return players
   }
 }
 

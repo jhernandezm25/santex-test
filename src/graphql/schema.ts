@@ -20,10 +20,14 @@ type Player {
     position: String
     dateOfBirth: String
     nationality: String
+    team: String
+    leagueCode: String
+    isCoach: Boolean
 }
 
 type Query {
   competitions: [Competition]
+  getPlayers(leagueCode: String!, teamName: String, coach:Boolean): [Player]
 }
 
 type Mutation {

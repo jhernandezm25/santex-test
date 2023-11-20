@@ -29,6 +29,10 @@ class CompetitionRepository {
     return this.competitionModel.findOne({ leagueId }).lean()
   }
 
+  async findByAttributte(query: any): Promise<Competition | null> {
+    return this.competitionModel.findOne(query).lean()
+  }
+
   async update(
     id: string,
     data: Partial<Competition>,
