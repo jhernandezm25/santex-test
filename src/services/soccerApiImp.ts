@@ -23,7 +23,11 @@ class SoccerApiServiceImpl implements ISoccerApiService {
     try {
       const url = `${process.env.URL_SOCCER_API}competitions/${league}/teams`
       const axiosRequest = await axios.get(url, this.generateHeaders())
-      return { isResult: true, data: axiosRequest.data }
+      if (axiosRequest.data.error) {
+        throw new Error(ErrorMessages.CODE_NOT_EXISTS)
+      } else {
+        return { isResult: true, data: axiosRequest.data }
+      }
     } catch (error: any) {
       console.log(error.message)
       return { isResult: false, message: error.message }

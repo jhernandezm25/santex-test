@@ -1,5 +1,5 @@
-import competitionRepository from '../repositories/competition.repository'
-import { Competition, CompetitionT } from '../models/competition'
+import competitionRepository from '../../repositories/competition.repository'
+import { Competition, CompetitionT } from '../../models/competition'
 import { ICompetition } from './competition.interface'
 
 class CompetitionController implements ICompetition {

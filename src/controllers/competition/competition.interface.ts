@@ -1,4 +1,4 @@
-import { Competition, CompetitionT } from '../models/competition'
+import { Competition, CompetitionT } from '../../models/competition'
 
 export interface ICompetition {
   getAllCompetitions(): Promise<Array<Competition>>
