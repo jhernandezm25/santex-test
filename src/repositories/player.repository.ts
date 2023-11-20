@@ -105,6 +105,12 @@ class PlayerRepository {
 
     const players = await PlayerModel.find(playersQuery).lean()
 
+    if (!players || players.length === 0) {
+      playersQuery = { ...playersQuery, isCoach: true }
+      const players = await PlayerModel.find(playersQuery).lean()
+      return players
+    }
+
     return players
   }
 }

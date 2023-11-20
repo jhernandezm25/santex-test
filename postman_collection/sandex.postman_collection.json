@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "60c82609-4aab-4b02-992e-fa26ed33fba8",
+		"name": "sandex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19053418"
+	},
+	"item": [
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create competition",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation importLeague($leagueCode: String!){\r\n    importLeague(leagueCode:$leagueCode){\r\n        name,\r\n        areaName\r\n    }\r\n}\r\n",
+						"variables": "{\r\n    \"leagueCode\":\"PL\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPlayers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getPlayers($leagueCode: String!, $teamName: String, $coach: Boolean){\r\n    getPlayers(leagueCode:$leagueCode, teamName: $teamName, coach: $coach){\r\n        name,\r\n        position,\r\n        nationality,\r\n        team\r\n    }\r\n}\r\n",
+						"variables": "{\r\n    \"leagueCode\":\"PL\",\r\n    \"teamName\": \"Bournemouth\",\r\n    \"coach\": true\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTeam",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getPlayers($leagueCode: String!, $teamName: String, $coach: Boolean){\r\n    getPlayers(leagueCode:$leagueCode, teamName: $teamName, coach: $coach){\r\n        name,\r\n        position,\r\n        nationality,\r\n        team\r\n    }\r\n}\r\n",
+						"variables": "{\r\n    \"leagueCode\":\"PL\",\r\n    \"teamName\": \"Bournemouth\",\r\n    \"coach\": true\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -27,7 +27,6 @@ type Player {
 }
 
 type Query {
-  competitions: [Competition]
   getPlayers(leagueCode: String!, teamName: String, coach:Boolean): [Player]
   getTeamByName(name: String!): Team
 }
