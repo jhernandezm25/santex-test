@@ -127,3 +127,15 @@ query getTeamByName( $name: String!){
 ```
 
 I add a postman collection in postman_collection folder
+
+## Future Work
+
+### Unit Testing
+
+Implementing unit tests is essential to ensure the robustness and reliability of the application. This includes testing various components such as repositories, services, and GraphQL resolvers. Adopting testing frameworks like Jest and incorporating test-driven development practices can enhance the overall code quality.
+
+### Caching System
+
+Integrating a caching system can significantly improve the performance of the application. Caching can be applied at different levels, such as API responses or database queries. Utilizing a caching mechanism helps reduce redundant API calls and enhances the responsiveness of the system. Popular caching solutions like Redis or in-memory caching can be considered for implementation.
+
+These additions would contribute to the application's stability, maintainability, and overall efficiency, providing a more robust solution for future developments.
