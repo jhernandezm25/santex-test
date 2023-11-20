@@ -1,6 +1,7 @@
 import { Model, Document } from 'mongoose'
-import { Team, TeamModel } from '../models/team'
+import { Team, TeamModel, TeamPlayer } from '../models/team'
 import { ErrorMessages } from '../common/errors/errors'
+import { PlayerModel } from '../models/player'
 
 class TeamRepository {
   private readonly teamModel: Model<Team & Document>
@@ -75,6 +76,33 @@ class TeamRepository {
       })
 
       return result
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
+
+  async getTeamByName(name: string): Promise<TeamPlayer> {
+    try {
+      const teamQuery: any = { name: new RegExp(name, 'i') }
+
+      const team: TeamPlayer | null = await TeamModel.findOne(teamQuery).lean()
+
+      if (!team) {
+        throw new Error(ErrorMessages.TEAM_NOT_FOUND)
+      }
+
+      const playersQuery: any = { team: new RegExp(name, 'i'), isCoach: false }
+
+      const players = await PlayerModel.find(playersQuery).lean()
+
+      if (!players || players.length === 0) {
+        const coachQuery: any = { team: new RegExp(name, 'i'), isCoach: true }
+        const players = await PlayerModel.find(coachQuery).lean()
+        team.players = players
+      } else {
+        team.players = players
+      }
+      return team
     } catch (error: any) {
       throw new Error(error.message)
     }

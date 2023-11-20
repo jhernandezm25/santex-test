@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import { schema } from './graphql/schema'
 import createLeague from './graphql/resolvers/createLeagueResolver'
 import getPlayersResolver from './graphql/resolvers/getPlayerResolver'
+import getTeamByNameResolver from './graphql/resolvers/getTeamsResolver'
 import { graphqlHTTP } from 'express-graphql'
 import DB from './database/mongodb'
 import rateLimit from 'express-rate-limit'
@@ -28,6 +29,7 @@ db.getConnection()
 const root = {
   importLeague: createLeague,
   getPlayers: getPlayersResolver,
+  getTeamByName: getTeamByNameResolver,
 }
 
 app.use(express.json())

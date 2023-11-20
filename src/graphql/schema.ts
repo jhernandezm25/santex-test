@@ -13,6 +13,7 @@ type Team {
   shortName: String
   areaName: String
   address: String
+  players: [Player]
 }
 
 type Player {
@@ -28,6 +29,7 @@ type Player {
 type Query {
   competitions: [Competition]
   getPlayers(leagueCode: String!, teamName: String, coach:Boolean): [Player]
+  getTeamByName(name: String!): Team
 }
 
 type Mutation {

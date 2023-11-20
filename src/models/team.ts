@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose'
+import { Player } from './player'
 
 export interface Team {
   idTeam: number
@@ -8,6 +9,10 @@ export interface Team {
   areaName: string
   address: string
   leagueCode: string
+}
+
+export interface TeamPlayer extends Team {
+  players?: Array<Player>
 }
 
 export interface TeamDocument extends Team, Document {}
