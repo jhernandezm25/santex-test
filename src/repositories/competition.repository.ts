@@ -4,6 +4,7 @@ import {
   CompetitionModel,
   CompetitionT,
 } from '../models/competition'
+import { ErrorMessages } from '../common/errors/errors'
 
 class CompetitionRepository {
   private readonly competitionModel: Model<Competition & Document>
@@ -41,7 +42,7 @@ class CompetitionRepository {
     const existingCompetition = await this.findByLeagueId(data.leagueId)
 
     if (existingCompetition) {
-      throw new Error('La competición ya existe con ese id')
+      throw new Error(ErrorMessages.COMPETITION_ALREADY_EXISTS)
     }
 
     const newCompetition = await this.competitionModel.create(data)
