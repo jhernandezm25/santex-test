@@ -4,6 +4,7 @@ import SoccerApiServiceImpl from '../../services/soccerApiImp'
 
 const createLeague = async (id: any) => {
   const { leagueCode } = id
+
   const response = await importLeagueData(
     leagueCode,
     CompetitionController,

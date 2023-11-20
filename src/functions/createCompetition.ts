@@ -20,7 +20,7 @@ const importLeagueData = async (
       return response
     }
   } catch (error: any) {
-    return { error: error.message }
+    throw new Error(error.message)
   }
 }
 

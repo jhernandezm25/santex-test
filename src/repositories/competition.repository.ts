@@ -41,7 +41,7 @@ class CompetitionRepository {
     const existingCompetition = await this.findByLeagueId(data.leagueId)
 
     if (existingCompetition) {
-      return Promise.reject('La competición ya existe con ese id.')
+      throw new Error('La competición ya existe con ese id')
     }
 
     const newCompetition = await this.competitionModel.create(data)

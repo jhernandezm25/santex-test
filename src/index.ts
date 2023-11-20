@@ -30,6 +30,14 @@ app.use(
     schema,
     rootValue: root,
     graphiql: true,
+    customFormatErrorFn: (err: any) => {
+      try {
+        err.details = JSON.parse(err)
+        return err
+      } catch {
+        return err
+      }
+    },
   }),
 )
 // health
